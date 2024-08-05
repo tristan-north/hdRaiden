@@ -1,0 +1,22 @@
+{
+    "Plugins": [
+        {
+            "Info": {
+                "Types": {
+                    "HdRaidenRendererPlugin": {
+                        "bases": [
+                            "HdRendererPlugin"
+                        ],
+                        "displayName": "Raiden",
+                        "priority": 0
+                    }
+                }
+            },
+            "LibraryPath": "hdRaiden.dll",
+            "Name": "hdRaiden",
+            "ResourcePath": "resources",
+            "Root": ".",
+            "Type": "library"
+        }
+    ]
+}

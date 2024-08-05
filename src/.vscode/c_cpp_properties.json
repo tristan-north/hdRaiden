@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "D:\\dev\\dependencies\\usd\\include",
+                "D:\\dev\\dependencies\\usd\\include\\boost-1_78",
+                "D:\\dev\\dependencies\\usd\\python\\include"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE",
+                "NOMINMAX"
+            ],
+            "windowsSdkVersion": "10.0.20348.0",
+            "compilerPath": "cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
