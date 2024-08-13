@@ -1,10 +1,3 @@
-# Compile with Visual Studio 2022 compiler. Run cmake from x64 Native Tools Command Prompt for VS 2022.
-
-# cd D:\dev\hdRaiden\buildHoudini
-# cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ..
-# ninja
-
-
 cmake_minimum_required(VERSION 3.10)
 
 # Define the project name and specify the programming language
@@ -17,8 +10,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(HFS "C:/Program Files/Side Effects Software/Houdini 20.5.278")
 
 # Define output directories for binaries and libraries
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../binHoudini)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../bin)
 
+# Odin build
+file(GLOB ODINSOURCES "src/*.odin")
+
+add_custom_command(
+    OUTPUT ${CMAKE_BINARY_DIR}/hdRdn_odin.lib
+    COMMAND odin build ../src -build-mode:static -strict-style -out:hdRdn_odin.lib
+    DEPENDS ${ODINSOURCES}
+)
+
+# Add a custom target for hdRdn_odin.lib
+add_custom_target(GenerateOdinLib ALL DEPENDS ${CMAKE_BINARY_DIR}/hdRdn_odin.lib)
+
+# C++ build
 include_directories(
 	${HFS}/toolkit/include
 	${HFS}/python311/include
@@ -26,10 +32,12 @@ include_directories(
 
 
 # Find all .cpp files in the src directory and store them in SOURCES variable
-file(GLOB SOURCES "src/*.cpp")
+file(GLOB CPPSOURCES "src/cpp/*.cpp")
 
 # Add the executable target and specify the source files
-add_library(hdRaiden SHARED ${SOURCES})
+add_library(hdRaiden SHARED ${CPPSOURCES})
+
+add_dependencies(hdRaiden GenerateOdinLib)
 
 target_link_libraries(hdRaiden PRIVATE
     ${HFS}/python311/libs/python311.lib
@@ -44,6 +52,7 @@ target_link_libraries(hdRaiden PRIVATE
     ${HFS}/custom/houdini/dsolib/libpxr_cameraUtil.lib
     ${HFS}/custom/houdini/dsolib/libpxr_vt.lib
     ${HFS}/custom/houdini/dsolib/libpxr_usdRender.lib
+    ${CMAKE_BINARY_DIR}/hdRdn_odin.lib
 )
 
 # From hcustom
@@ -54,5 +63,7 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MDd /Zi /Ob0 /Od /RTC1")
 endif()
 
-# Set the linker options to not generate manifest files
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /MANIFEST:NO")
+# Disable manifest generation
+if(MSVC)
+    target_link_options(hdRaiden PRIVATE /MANIFEST:NO)
+endif()

@@ -3,12 +3,12 @@
         {
             "Info": {
                 "Types": {
-                    "HdRaidenRendererPlugin": {
+                    "HdRdnRendererPlugin": {
                         "bases": [
                             "HdRendererPlugin"
                         ],
                         "displayName": "Raiden",
-                        "priority": 0
+                        "priority": 99
                     }
                 }
             },

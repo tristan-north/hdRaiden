@@ -5,6 +5,7 @@
 // https://openusd.org/license.
 //
 
+#include "odin.h"
 #include "renderDelegate.h"
 #include "renderPass.h"
 #include "pxr/imaging/hd/renderPassState.h"
@@ -37,6 +38,7 @@ HdRdnRenderPass::_Execute(HdRenderPassStateSharedPtr const& renderPassState,
                              TfTokenVector const &renderTags)
 {
     std::cout << "=> Execute RenderPass: Rendering!" << std::endl;
+    from_odin();
 
     HdRenderPassAovBindingVector aovBindings = renderPassState->GetAovBindings();
     if(aovBindings.empty()) {
