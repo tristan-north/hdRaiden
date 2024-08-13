@@ -14,7 +14,7 @@ import "base:runtime"
 from_odin :: proc "c" () {
   context = runtime.default_context()
   runtime._startup_runtime()  // This should be in some sort of Odin Init function
-  fmt.println("from_odin!!!")
+  fmt.println("from_odin__$@")
 
 //  print_test_cpp()
 }
