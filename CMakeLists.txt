@@ -21,7 +21,7 @@ file(GLOB ODINSOURCES "src/*.odin")
 
 add_custom_command(
     OUTPUT ${CMAKE_BINARY_DIR}/hdRdn_odin.lib
-    COMMAND odin build ../src -build-mode:static -strict-style -out:hdRdn_odin.lib
+    COMMAND odin build ../src -build-mode:static -strict-style -vet -out:hdRdn_odin.lib
     DEPENDS ${ODINSOURCES}
 )
 
