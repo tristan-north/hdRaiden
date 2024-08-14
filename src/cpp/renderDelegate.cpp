@@ -213,11 +213,3 @@ HdRdnRenderDelegate::GetDefaultAovDescriptor(TfToken const& name) const
 }
 
 PXR_NAMESPACE_CLOSE_SCOPE
-
-
-
-
-extern "C" __declspec(dllexport) void print_test_cpp() {
-    std::cout << "print_test_cpp()" << std::endl;
-}
-

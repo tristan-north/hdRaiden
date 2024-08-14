@@ -7,20 +7,27 @@ package hdRaiden
 //	print_test_cpp :: proc () ---
 //}
 
-import "core:fmt"
 import "base:runtime"
+import "core:fmt"
 
-@export @(linkage="strong")
+@(export)
+@(linkage = "strong")
 from_odin :: proc "c" () {
-  context = runtime.default_context()
-  runtime._startup_runtime()  // This should be in some sort of Odin Init function
-  fmt.println("from_odin__$@")
+	context = runtime.default_context()
+	runtime._startup_runtime() // This should be in some sort of Odin Init function
+	fmt.println("from_odin__$@")
 
-//  print_test_cpp()
+	//  print_test_cpp()
 }
 
 
 odin_cleanup :: proc "c" () {
-  context = runtime.default_context()
-  runtime._cleanup_runtime()
+	context = runtime.default_context()
+	runtime._cleanup_runtime()
+}
+
+@(export)
+get_clear_color :: proc "c" () -> [3]f32 {
+	color := [3]f32{.2, .2, .2}
+	return color
 }

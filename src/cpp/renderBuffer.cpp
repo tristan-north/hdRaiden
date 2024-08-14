@@ -116,7 +116,7 @@ HdRdnRenderBuffer::Allocate(GfVec3i const& dimensions,
 }
 
 void
-HdRdnRenderBuffer::Clear()
+HdRdnRenderBuffer::Clear(float r, float g, float b)
 {
     size_t formatDataSize = HdDataSizeOfFormat(_format);
 
@@ -124,20 +124,27 @@ HdRdnRenderBuffer::Clear()
         for (size_t i = 0; i < _width * _height; ++i) {
             uint16_t *dst = reinterpret_cast<uint16_t*>(&_buffer[i*formatDataSize]);
 
-            dst[0] = GfHalf(1.0f).bits();
-            dst[1] = GfHalf(0.5f).bits();
-            dst[2] = GfHalf(0.5f).bits();
+            dst[0] = GfHalf(r).bits();
+            dst[1] = GfHalf(g).bits();
+            dst[2] = GfHalf(b).bits();
             dst[3] = GfHalf(1.0f).bits();
         }
     }
-    else if(_format == HdFormatFloat32) {
+
+}
+
+void
+HdRdnRenderBuffer::ClearDepth()
+{
+    size_t formatDataSize = HdDataSizeOfFormat(_format);
+
+    if(_format == HdFormatFloat32) {
         for (size_t i = 0; i < _width * _height; ++i) {
             float *dst = reinterpret_cast<float*>(&_buffer[i*formatDataSize]);
 
             dst[0] = 0.1f;
         }
     }
-
 
 }
 

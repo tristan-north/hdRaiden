@@ -63,7 +63,8 @@ public:
                   HdFormat format,
                   bool multiSampled) override;
 
-    void Clear();
+    void Clear(float r, float g, float b);
+    void ClearDepth();
 
     /// Accessor for buffer width.
     ///   \return The width of the currently allocated buffer.

@@ -2,7 +2,7 @@
  - Open command prompt x64 Native Tools Command Prompt for VS 2019
 
  If building for Houdini:
- - Open command prompt x64 Native Tools Command Prompt for VS 2022
+ - Open command prompt x64 Native Tools Command Prompt for VS 2022 (also works in VS 2019 need to check which should be used)
 
 Then:
  - Make build dir if it doesn't exist. cd to build. 

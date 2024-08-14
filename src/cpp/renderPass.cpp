@@ -38,7 +38,6 @@ HdRdnRenderPass::_Execute(HdRenderPassStateSharedPtr const& renderPassState,
                              TfTokenVector const &renderTags)
 {
     std::cout << "=> Execute RenderPass: Rendering!" << std::endl;
-    from_odin();
 
     HdRenderPassAovBindingVector aovBindings = renderPassState->GetAovBindings();
     if(aovBindings.empty()) {
@@ -50,9 +49,11 @@ HdRdnRenderPass::_Execute(HdRenderPassStateSharedPtr const& renderPassState,
         
         if(aovBindings[i].aovName == HdAovTokens->color) {
             HdRdnRenderBuffer *rb = static_cast<HdRdnRenderBuffer*>(aovBindings[i].renderBuffer);
+
+            Vec3 color = get_clear_color();
         
             rb->Map();
-            rb->Clear();
+            rb->Clear(color.r, color.g, color.b);
             rb->Unmap();
             rb->SetConverged(true);
             std::cout << "Cleared color buffer." << std::endl;
@@ -61,7 +62,7 @@ HdRdnRenderPass::_Execute(HdRenderPassStateSharedPtr const& renderPassState,
             HdRdnRenderBuffer *rb = static_cast<HdRdnRenderBuffer*>(aovBindings[i].renderBuffer);
         
             rb->Map();
-            rb->Clear();
+            rb->ClearDepth();
             rb->Unmap();
             rb->SetConverged(true);
             std::cout << "Cleared depth buffer." << std::endl;
