@@ -126,6 +126,10 @@ public:
     /// Resolve the sample buffer into final values.
     void Resolve() override;
 
+    uint8_t* data() {
+        return _buffer.data();
+    }
+
 private:
     // Release any allocated resources.
     void _Deallocate() override;

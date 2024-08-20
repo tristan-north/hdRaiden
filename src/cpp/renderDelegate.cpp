@@ -8,6 +8,7 @@
 #include "mesh.h"
 #include "renderPass.h"
 #include "renderBuffer.h"
+#include "odin.h"
 
 #include <iostream>
 
@@ -46,12 +47,47 @@ HdRdnRenderDelegate::_Initialize()
 {
     std::cout << "Creating Rdn RenderDelegate" << std::endl;
     _resourceRegistry = std::make_shared<HdResourceRegistry>();
+    
+    odin_init();
+    gl_funcptr_setup();
 }
 
 HdRdnRenderDelegate::~HdRdnRenderDelegate()
 {
     _resourceRegistry.reset();
     std::cout << "Destroying Rdn RenderDelegate" << std::endl;
+    odin_cleanup();
+}
+
+void HdRdnRenderDelegate::SetDrivers(HdDriverVector const& drivers)
+{
+    std::cout << "SetDrivers" << std::endl;
+    /*
+    if (_hgi)
+    {
+        TF_CODING_ERROR("Cannot set HdDriver twice for a render delegate.");
+        return;
+    }
+
+    // We want to use the Hgi driver, so extract it.
+    for (HdDriver* hdDriver : drivers)
+    {
+        if (hdDriver->name == pxr::HgiTokens->renderDriver &&
+            hdDriver->driver.IsHolding<pxr::Hgi*>())
+        {
+            _hgi = hdDriver->driver.UncheckedGet<pxr::Hgi*>();
+            break;
+        }
+    }
+*/
+    // std::lock_guard<std::mutex> guard(mutexResourceRegistry);
+
+    // if (counterResourceRegistry++ == 0)
+    // {
+    //     resourceRegistry.reset(new HdResourceRegistry());
+    // }
+
+    // TF_VERIFY(_hgi, "HdAurora requires a Hgi HdDriver.");
 }
 
 TfTokenVector const&
@@ -202,7 +238,7 @@ HdRdnRenderDelegate::GetDefaultAovDescriptor(TfToken const& name) const
 {
     if (name == HdAovTokens->color)
     {
-        return HdAovDescriptor(HdFormatFloat16Vec4, false, VtValue(GfVec4f(0.0f)));
+        return HdAovDescriptor(HdFormatFloat16Vec4, false, VtValue(GfVec3f(0.0f)));
     }
     else if (name == HdAovTokens->depth)
     {

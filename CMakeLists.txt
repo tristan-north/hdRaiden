@@ -62,6 +62,7 @@ if(TARGET_DCC STREQUAL Houdini)
         ${HOUDINI_ROOT}/custom/houdini/dsolib/libpxr_hd.lib
         ${HOUDINI_ROOT}/custom/houdini/dsolib/libpxr_hf.lib
         ${HOUDINI_ROOT}/custom/houdini/dsolib/libpxr_arch.lib
+        ${HOUDINI_ROOT}/custom/houdini/dsolib/libpxr_garch.lib
         ${HOUDINI_ROOT}/custom/houdini/dsolib/libpxr_gf.lib
         ${HOUDINI_ROOT}/custom/houdini/dsolib/libpxr_cameraUtil.lib
         ${HOUDINI_ROOT}/custom/houdini/dsolib/libpxr_vt.lib
@@ -80,6 +81,7 @@ else()
         ${USD_ROOT}/lib/usd_hd.lib
         ${USD_ROOT}/lib/usd_hf.lib
         ${USD_ROOT}/lib/usd_arch.lib
+        ${USD_ROOT}/lib/usd_garch.lib
         ${USD_ROOT}/lib/usd_gf.lib
         ${USD_ROOT}/lib/usd_cameraUtil.lib
         ${USD_ROOT}/lib/usd_vt.lib

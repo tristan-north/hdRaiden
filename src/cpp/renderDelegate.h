@@ -11,6 +11,7 @@
 #include "pxr/imaging/hd/renderDelegate.h"
 #include "pxr/imaging/hd/resourceRegistry.h"
 #include "pxr/base/tf/staticTokens.h"
+#include "pxr/imaging/hgi/hgi.h"
 
 PXR_NAMESPACE_OPEN_SCOPE
 
@@ -33,6 +34,8 @@ public:
     HdRdnRenderDelegate(HdRenderSettingsMap const& settingsMap);
     /// Render delegate destructor.
     virtual ~HdRdnRenderDelegate();
+
+    void SetDrivers(HdDriverVector const& drivers) override;
 
     /// Supported types
     const TfTokenVector &GetSupportedRprimTypes() const override;
