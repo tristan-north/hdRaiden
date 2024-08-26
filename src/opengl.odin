@@ -9,12 +9,12 @@ import "core:fmt"
 
 glClearColor : proc "c" (f32, f32, f32, f32)
 @(export)
-odin_glClearColor :: proc "c" (func_ptr: proc "c" (f32, f32, f32, f32)) {
+odin_glClearColor :: proc "c" (func_ptr: type_of(glClearColor)) {
 	glClearColor = func_ptr
 }
 
 glClear : proc "c" (u32)
 @(export)
-odin_glClear :: proc "c" (func_ptr: proc "c" (u32)) {
+odin_glClear :: proc "c" (func_ptr: type_of(glClear)) {
 	glClear = func_ptr
 }

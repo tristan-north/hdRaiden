@@ -11,10 +11,34 @@ void odin_render(void* buffer_data, int width, int height);
 void odin_clear();
 
 
-// OpenGL functions
+// OpenGL functions.
+// Here we're passing the function pointers which have already been set up by Hydra based on its own OpenGL context to Odin so we can use OpenGL from Odin.
 void gl_funcptr_setup();
+
 void odin_glClearColor(void (*func_ptr)(float, float, float, float));
 void odin_glClear(void (*func_ptr)(GLbitfield));
+void odin_glUniformMatrix2fv(void (*func_ptr)(GLint location, GLsizei count, GLboolean transpose, const GLfloat *value));
+GLint odin_glGetUniformLocation(GLint (*func_ptr)(GLuint program, const GLchar *name));
+void odin_glViewport(void (*func_ptr)(GLint x, GLint y, GLsizei width, GLsizei height));
+void odin_glPixelStorei(void (*func_ptr)(GLenum pname, GLint param));
+void odin_glGenTextures(void (*func_ptr)(GLsizei n, GLuint * textures));
+void odin_glBindTexture(void (*func_ptr)(GLenum target, GLuint texture));
+void odin_glTexImage2D(void (*func_ptr)(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLint border, GLenum format, GLenum type, const void * data));
+void odin_glTexParameteri(void (*func_ptr)(GLenum target, GLenum pname, GLint param));
+void odin_glGenVertexArrays(void (*func_ptr)(GLsizei n, GLuint *arrays));
+void odin_glBindVertexArray(void (*func_ptr)(GLuint array));
+void odin_glGenBuffers(void (*func_ptr)(GLsizei n, GLuint * buffers));
+void odin_glBindBuffer(void (*func_ptr)(GLenum target, GLuint buffer));
+void odin_glBufferData(void (*func_ptr)(GLenum target, GLsizeiptr size, const void * data, GLenum usage));
+void odin_glVertexAttribPointer(void (*func_ptr)(GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const void * pointer));
+void odin_glEnableVertexAttribArray(void (*func_ptr)(GLuint index));
+void odin_glUseProgram(void (*func_ptr)(GLuint program));
+void odin_glEnable(void (*func_ptr)(GLenum cap));
+void odin_glBlendFunc(void (*func_ptr)GLenum sfactor, GLenum dfactor));
+void odin_glBufferSubData(void (*func_ptr)(GLenum target, GLintptr offset, GLsizeiptr size, const void * data));
+void odin_glDrawArrays(void (*func_ptr)(GLenum mode, GLint first, GLsizei count));
+
+
 
     // glGenFramebuffers(1, &framebuffer);
     // glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
